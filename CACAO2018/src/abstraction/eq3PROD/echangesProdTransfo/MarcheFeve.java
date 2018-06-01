@@ -11,6 +11,11 @@ public class MarcheFeve implements IMarcheFeve {
 		this.contratActuel = new ContratFeve[1];
 		contratActuel[0] = new ContratFeve();
 	}
+	
+	public MarcheFeve(ContratFeve[] contratPrecedent, ContratFeve[] contratActuel) {
+		this.contratPrecedent = contratPrecedent;
+		this.contratActuel = contratActuel;
+	}
 
 	@Override
 	public double getPrixMarche() {
@@ -27,8 +32,8 @@ public class MarcheFeve implements IMarcheFeve {
 	}
 
 	@Override
-	public ContratFeve[] getContrat() {
-		return this.contratActuel;
+	public ContratFeve[] getContratPrecedent() {
+		return this.contratPrecedent;
 	}
 
 }
