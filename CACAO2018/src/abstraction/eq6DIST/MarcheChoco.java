@@ -97,8 +97,9 @@ public void actu() {
 				annexe_commande_nulle= false;
 				Commande_nulle.
 			}*/
-			if (this.Commande_correct(ibis.getCommande(this.prix,this.stock))) {
-				commande.add(ibis.getCommande(this.prix, this.stock));
+			ArrayList<ArrayList<Integer>> gg=ibis.getCommande(this.prix,this.stock);
+			if (this.Commande_correct(gg)) {
+				commande.add(gg);
 				this.Journal_Marche_choco.ajouter("Commande de "+i.getNom()+"correcte et ajoutée");
 			}else {
 				this.Journal_Marche_choco.ajouter("Commande de "+i.getNom()+"incorrecte");
