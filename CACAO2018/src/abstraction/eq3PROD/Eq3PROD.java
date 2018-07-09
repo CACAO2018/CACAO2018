@@ -30,7 +30,7 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 	private String nomEq;
 	private Indicateur stockQM=new Indicateur ("Stock de Eq3PROD de moyenne qualité", this, 75000);
 	private Indicateur stockQH=new Indicateur ("Stock de Eq3PROD de haute qualité", this, 24000);
-	private Indicateur solde2 = new Indicateur ("Solde de Eq3PROD", this, 0) ; 
+	private Indicateur solde2 = new Indicateur ("Solde de Eq3PROD", this, 4000000000.0) ; 
 	
 	private Maladie foreur;
 	private Maladie balai;
@@ -49,10 +49,6 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 		setNom("Eq3PROD");
 		
 		setJournal(new Journal("Journal de Eq3PROD"));
-		Monde.LE_MONDE.ajouterJournal(getJournal());
-		Monde.LE_MONDE.ajouterIndicateur(getStockQHaut());
-		Monde.LE_MONDE.ajouterIndicateur(getStockQMoy());
-		Monde.LE_MONDE.ajouterIndicateur(getSolde2());
 		
 		ArrayList<Acteur> listActeurs = Monde.LE_MONDE.getActeurs();
 		ArrayList<IVendeurFeveV4> producteurs = new ArrayList<IVendeurFeveV4>();
@@ -75,6 +71,10 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 		this.foreur = new Maladie(0.042, 0.10, 4, "Foreur des cabosses");
 		this.balai = new Maladie(0.008, 0.60, 3, "Balai de sorcière");
 		
+		Monde.LE_MONDE.ajouterJournal(getJournal());
+		Monde.LE_MONDE.ajouterIndicateur(getStockQHaut());
+		Monde.LE_MONDE.ajouterIndicateur(getStockQMoy());
+		Monde.LE_MONDE.ajouterIndicateur(getSolde2());
 		
 		this.nom = "Eq3PROD";
 		
