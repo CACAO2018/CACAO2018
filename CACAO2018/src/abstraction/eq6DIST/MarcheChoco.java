@@ -19,6 +19,7 @@ public class MarcheChoco  implements Acteur{
 	
 	public MarcheChoco() {
 		this.Journal_Marche_choco=new Journal("Journal Marche Choco");
+		Monde.LE_MONDE.ajouterJournal(this.Journal_Marche_choco);
 	}
 public void actu() {
 		this.transformateurs= new ArrayList<Acteur>();
@@ -174,11 +175,12 @@ public void actu() {
 		if (PourDIST.size()!=0) {
 		for (Acteur i : this.distributeurs) {
 			IAcheteurChocoBis ibis = (IAcheteurChocoBis) i;
+			if (l<paiement.size()){
 			this.Journal_Marche_choco.ajouter("Envoie de "+PourDIST.get(l).toString()+" à "+i.getNom()+"et ce dernier doit payer "+paiement.get(l));
 			ibis.livraison(PourDIST.get(l),paiement.get(l));
 			l++;
 			System.out.println("Le distributeur est"+((Acteur) ibis).getNom());
-		}
+		}}
 		}
 		l=0;
 	}
@@ -250,3 +252,4 @@ public void actu() {
 		return true;
 	}
 }
+
