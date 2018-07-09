@@ -68,8 +68,8 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 		this.ajouterStockMoyen(75000);
 		this.ajouterStockFin(24000);
 		this.listeContrats=new ArrayList<ContratFeveV3>();
-		this.foreur = new Maladie(0.042, 0.10, 4, "Foreur des cabosses");
-		this.balai = new Maladie(0.008, 0.60, 3, "Balai de sorcière");
+		this.foreur = new Maladie(0.042, 0.10, 2, "Foreur des cabosses");
+		this.balai = new Maladie(0.008, 0.60, 4, "Balai de sorcière");
 		
 		Monde.LE_MONDE.ajouterJournal(getJournal());
 		Monde.LE_MONDE.ajouterIndicateur(getStockQHaut());
@@ -471,8 +471,8 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 			this.getJournal().ajouter(" ");
 			this.getJournal().ajouter("> Production :");
 			this.getJournal().ajouter("<tt>- Moyenne qualité (Indonésie) : "+longToString(((long) (coeffIndonesie*prodIndo)))+" tonnes</tt>");
-			this.getJournal().ajouter("<tt>- Moyenene qualité (Brésil) : "+longToString(((long) (coeffAmerique*prodBresil)))+" tonnes</tt>");
-			this.getJournal().ajouter("<tt>- Moyenene qualité (Importation d'Afrique) : "+longToString((long) (qteAchatAfrique))+" tonnes</tt>"); 
+			this.getJournal().ajouter("<tt>- Moyenne qualité (Brésil) : "+longToString(((long) (coeffAmerique*prodBresil)))+" tonnes</tt>");
+			this.getJournal().ajouter("<tt>- Moyenne qualité (Importation d'Afrique) : "+longToString((long) (qteAchatAfrique))+" tonnes</tt>"); 
 			this.getJournal().ajouter("<tt>- Haute qualité (Equateur) : "+longToString(((long) (coeffAmerique*prodfin)))+" tonnes</tt>");
 			this.getJournal().ajouter(" ");
 			this.getJournal().ajouter("> Maladies :");
