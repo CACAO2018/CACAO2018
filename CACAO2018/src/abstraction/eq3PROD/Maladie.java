@@ -12,13 +12,13 @@ public class Maladie {
 	public double probaD;
 	public double pertesProd;
 	public int maladieActive;
-	public int dureeMax;
+	public int duree;
 	public String nom;
 	
-	public Maladie(double probaD, double pertesProd, int dureeMax, String nom) {
+	public Maladie(double probaD, double pertesProd, int duree, String nom) {
 		this.probaD = probaD;
 		this.pertesProd = pertesProd;
-		this.dureeMax = dureeMax;
+		this.duree = duree;
 		this.maladieActive = 0;
 		this.nom = nom;
 	}
@@ -34,7 +34,7 @@ public class Maladie {
 	public void setMaladieActive() {
 		if (this.declencherMaladie()) {
 			Random r = new Random();
-			this.maladieActive = dureeMax+r.nextInt(dureeMax+1);
+			this.maladieActive = duree+r.nextInt(duree+1);
 		}
 	}
 	
