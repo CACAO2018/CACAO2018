@@ -464,7 +464,7 @@ public class Eq6DIST implements Acteur, IAcheteurChocoBis, InterfaceDistributeur
 		
 		for (int i=3;i<6;i++) {  //on calcule la marge pour chaque type de chocolat
 
-			
+			 
 			Nmarge=this.prix.get(i)*Q.getValeur(i-3)*p;
 
 			margeUnitaire=this.prix.get(i)*p;
