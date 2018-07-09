@@ -314,7 +314,6 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 				if(contrat.getReponse() == true) {
 					if(contrat.getQualite() == 1) { 	 	  	  		   		 	 	
 						int sommemoyen=0;
-						if (quantiteTotale<=this.quantiteStockMoyen()) {
 						while(sommemoyen+this.stockmoyen.get(0).get(0)<contrat.getProposition_Quantite()) {
 							sommemoyen+=this.stockmoyen.get(0).get(0);
 							this.stockmoyen.remove(0);
@@ -322,19 +321,6 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 						this.stockmoyen.get(0).set(0,this.stockmoyen.get(0).get(0)-(contrat.getProposition_Quantite()-sommemoyen));  	  		   		 	 	
 						solde += contrat.getProposition_Prix()*contrat.getProposition_Quantite() ;  
 						}
-						else {
-							double prixAchatAfrique = ((IVendeurFevesProd) Monde.LE_MONDE.getActeur("Eq2PROD")).getPrix()*(quantiteTotale-this.quantiteStockMoyen()); 
-							this.setSolde(this.getSolde2().getValeur()-prixAchatAfrique);
-							this.solde2.setValeur(this, this.solde);
-							int qteAchatAfrique = ((IVendeurFevesProd) Monde.LE_MONDE.getActeur("Eq2PROD")).acheter(quantiteTotale-this.quantiteStockMoyen()); 
-							this.ajouterStockMoyen(qteAchatAfrique);
-						while(sommemoyen+this.stockmoyen.get(0).get(0)<contrat.getProposition_Quantite()) {
-							sommemoyen+=this.stockmoyen.get(0).get(0);
-							this.stockmoyen.remove(0);
-						}
-						this.stockmoyen.get(0).set(0,this.stockmoyen.get(0).get(0)-(contrat.getProposition_Quantite()-sommemoyen));  	  		   		 	 	
-						solde += contrat.getProposition_Prix()*contrat.getProposition_Quantite() ;  
-						}}
 						else { 						
 						int sommefin=0;
 						while(sommefin+this.stockfin.get(0).get(0)<contrat.getProposition_Quantite()) {
