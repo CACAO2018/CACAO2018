@@ -425,9 +425,10 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 			int qteAchatAfrique = 0;
 
 			if(this.quantiteStockMoyen()<this.getStockMoyenCritique()) {
-				prixAchatAfrique = ((IVendeurFevesProd) Monde.LE_MONDE.getActeur("Eq2PROD")).getPrix()*(this.getStockMoyenCritique()-this.quantiteStockMoyen());
+				prixAchatAfrique = ((IVendeurFevesProd) Monde.LE_MONDE.getActeur("Eq2PROD")).getPrix();
 				this.solde-= prixAchatAfrique;
-				qteAchatAfrique = ((IVendeurFevesProd) Monde.LE_MONDE.getActeur("Eq2PROD")).acheter(this.getStockMoyenCritique()-this.quantiteStockMoyen());
+				qteAchatAfrique = this.getStockMoyenCritique()-this.quantiteStockMoyen();
+				((IVendeurFevesProd) Monde.LE_MONDE.getActeur("Eq2PROD")).acheter(this.getStockMoyenCritique()-this.quantiteStockMoyen());
 				this.ajouterStockMoyen(qteAchatAfrique);
 			}
 
