@@ -466,7 +466,7 @@ public class Eq6DIST implements Acteur, IAcheteurChocoBis, InterfaceDistributeur
 
 			 
 			Nmarge=this.prix.get(i)*Q.getValeur(i-3)*p;
-
+ 
 			margeUnitaire=this.prix.get(i)*p;
 			if(Nmarge<this.marge.get(i) && (this.prix.get(i)+margeUnitaire)<=prixMax.get(i)) {
 				this.prix.set(i, this.prix.get(i)+margeUnitaire); //on définit le nouveau prix
