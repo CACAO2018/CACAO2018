@@ -419,11 +419,12 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 			this.balai.setMaladieActive();
 			double coeffAmerique = balai.pertesMaladie();
 			double coeffIndonesie = foreur.pertesMaladie();
+
+			this.vieillirStock();
 			
 			this.ajouterStockFin((int) (coeffAmerique*prodfin));
 			this.ajouterStockMoyen((int) (coeffAmerique*prodBresil+coeffIndonesie*prodIndo));
 			
-			this.vieillirStock();
 			 
 			double prixAchatAfrique = 0.0; 
 			int qteAchatAfrique = 0;
