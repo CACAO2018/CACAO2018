@@ -431,7 +431,7 @@ public class Eq6DIST implements Acteur, IAcheteurChocoBis, InterfaceDistributeur
 			this.banque.setValeur(this, this.banque.getValeur() + this.prix.get(i-3)*res[i]);		
 			this.stock.set(i-3, this.stock.get(i-3)-res[i]);
 
-		} 
+		}
 		this.modifPrix(Q);
 		return new GrilleQuantite(res); 
 	}
