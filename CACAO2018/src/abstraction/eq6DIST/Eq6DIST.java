@@ -139,9 +139,8 @@ public class Eq6DIST implements Acteur, IAcheteurChocoBis, InterfaceDistributeur
 					 if(j<p && i<acteurs.size()) {
 						 p=j; //on choisit la proposition avec le prix minimum
 						 a=acteurs.get(b);
-					 }else {
-						 b+=1;
 					 }
+					 b+=1;
 				}
 				if (p<1000000000) { 
 				((IvendeurOccasionnelChocoTer)a).envoyerReponseTer(this, d.getQuantite(), d.getQualite(), p); //envoi de la proposition choisie
