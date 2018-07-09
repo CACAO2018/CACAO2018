@@ -1,21 +1,19 @@
-package abstraction.eq5TRAN.util;
+package abstraction.eq4TRAN;
 
 import java.lang.reflect.Field;
-
 /**
- * @author Thomas Schillaci
+ * 
+ * @author Etienne
+ *
  */
 public class Marchandises {
 
-    public static final int FEVES_BQ = 0;
-    public static final int FEVES_MQ = 1;
-    public static final int TABLETTES_BQ = 2;
-    public static final int TABLETTES_MQ = 3;
-    public static final int TABLETTES_HQ = 4;
-    public static final int FRIANDISES_MQ = 5;
-    public static final int POUDRE_BQ = 6;
-    public static final int POUDRE_MQ = 7;
-    public static final int POUDRE_HQ = 8;
+	public static final int StockChocBQ = 1;
+	public static final int StockChocMQ = 2;
+	public static final int StockChocHQ = 3;
+	public static final int StockTabBQ = 4;
+	public static final int StockTabMQ = 5;
+	public static final int StockTabHQ = 6;
 
     public static String getMarchandise(int index) {
         for (Field field : Marchandises.class.getDeclaredFields()) {
@@ -47,5 +45,4 @@ public class Marchandises {
         }
         return -1;
     }
-
 }
