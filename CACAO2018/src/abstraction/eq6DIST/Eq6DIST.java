@@ -97,10 +97,10 @@ public class Eq6DIST implements Acteur, IAcheteurChocoBis, InterfaceDistributeur
 	public void next() {
 		// TODO Auto-generated method stub;
 		this.stock_BBQ.setValeur(this, this.stock.get(0));
-		this.stock_BMQ.setValeur(this, this.stock.get(1));
+		this.stock_BMQ.setValeur(this, this.stock.get(1) + 58000/26);
 		this.stock_BHQ.setValeur(this, this.stock.get(2));
-		this.stock_TBQ.setValeur(this, this.stock.get(3));
-		this.stock_TMQ.setValeur(this, this.stock.get(4));
+		this.stock_TBQ.setValeur(this, this.stock.get(3) + 420000/26);
+		this.stock_TMQ.setValeur(this, this.stock.get(4) + 577500/26);
 		this.stock_THQ.setValeur(this, this.stock.get(5));
 		this.prix_BBQ.setValeur(this, this.prix.get(0));
 		this.prix_BMQ.setValeur(this, this.prix.get(1));
@@ -417,7 +417,6 @@ public class Eq6DIST implements Acteur, IAcheteurChocoBis, InterfaceDistributeur
 			}
 			
 			this.banque.setValeur(this, this.banque.getValeur() + this.prix.get(i+3)*res[i]);	
-			this.stock.set(i+3, this.stock.get(i+3)-res[i]);
 
 		}
 		for (int i=3;i<6;i++) {
@@ -429,7 +428,6 @@ public class Eq6DIST implements Acteur, IAcheteurChocoBis, InterfaceDistributeur
 			}
 
 			this.banque.setValeur(this, this.banque.getValeur() + this.prix.get(i-3)*res[i]);		
-			this.stock.set(i-3, this.stock.get(i-3)-res[i]);
 
 		}
 		this.modifPrix(Q);
