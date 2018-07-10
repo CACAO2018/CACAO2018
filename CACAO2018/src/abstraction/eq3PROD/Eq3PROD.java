@@ -30,7 +30,7 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 	private String nomEq;
 	private Indicateur stockQM=new Indicateur ("Stock de Eq3PROD de moyenne qualité", this, 75000);
 	private Indicateur stockQH=new Indicateur ("Stock de Eq3PROD de haute qualité", this, 24000);
-	private Indicateur solde2 = new Indicateur ("Solde de Eq3PROD", this, 0) ; 
+	private Indicateur solde2 = new Indicateur ("Solde de Eq3PROD", this, 4000000000.0) ; 
 	
 	private Maladie foreur;
 	private Maladie balai;
@@ -49,10 +49,6 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 		setNom("Eq3PROD");
 		
 		setJournal(new Journal("Journal de Eq3PROD"));
-		Monde.LE_MONDE.ajouterJournal(getJournal());
-		Monde.LE_MONDE.ajouterIndicateur(getStockQHaut());
-		Monde.LE_MONDE.ajouterIndicateur(getStockQMoy());
-		Monde.LE_MONDE.ajouterIndicateur(getSolde2());
 		
 		ArrayList<Acteur> listActeurs = Monde.LE_MONDE.getActeurs();
 		ArrayList<IVendeurFeveV4> producteurs = new ArrayList<IVendeurFeveV4>();
@@ -72,9 +68,13 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 		this.ajouterStockMoyen(75000);
 		this.ajouterStockFin(24000);
 		this.listeContrats=new ArrayList<ContratFeveV3>();
-		this.foreur = new Maladie(0.042, 0.10, 4, "Foreur des cabosses");
-		this.balai = new Maladie(0.008, 0.60, 3, "Balai de sorcière");
+		this.foreur = new Maladie(0.042, 0.10, 2, "Foreur des cabosses");
+		this.balai = new Maladie(0.008, 0.60, 4, "Balai de sorcière");
 		
+		Monde.LE_MONDE.ajouterJournal(getJournal());
+		Monde.LE_MONDE.ajouterIndicateur(getStockQHaut());
+		Monde.LE_MONDE.ajouterIndicateur(getStockQMoy());
+		Monde.LE_MONDE.ajouterIndicateur(getSolde2());
 		
 		this.nom = "Eq3PROD";
 		
@@ -314,7 +314,6 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 				if(contrat.getReponse() == true) {
 					if(contrat.getQualite() == 1) { 	 	  	  		   		 	 	
 						int sommemoyen=0;
-						if (quantiteTotale<=this.quantiteStockMoyen()) {
 						while(sommemoyen+this.stockmoyen.get(0).get(0)<contrat.getProposition_Quantite()) {
 							sommemoyen+=this.stockmoyen.get(0).get(0);
 							this.stockmoyen.remove(0);
@@ -322,19 +321,6 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 						this.stockmoyen.get(0).set(0,this.stockmoyen.get(0).get(0)-(contrat.getProposition_Quantite()-sommemoyen));  	  		   		 	 	
 						solde += contrat.getProposition_Prix()*contrat.getProposition_Quantite() ;  
 						}
-						else {
-							double prixAchatAfrique = ((IVendeurFevesProd) Monde.LE_MONDE.getActeur("Eq2PROD")).getPrix()*(quantiteTotale-this.quantiteStockMoyen()); 
-							this.setSolde(this.getSolde2().getValeur()-prixAchatAfrique);
-							this.solde2.setValeur(this, this.solde);
-							int qteAchatAfrique = ((IVendeurFevesProd) Monde.LE_MONDE.getActeur("Eq2PROD")).acheter(quantiteTotale-this.quantiteStockMoyen()); 
-							this.ajouterStockMoyen(qteAchatAfrique);
-						while(sommemoyen+this.stockmoyen.get(0).get(0)<contrat.getProposition_Quantite()) {
-							sommemoyen+=this.stockmoyen.get(0).get(0);
-							this.stockmoyen.remove(0);
-						}
-						this.stockmoyen.get(0).set(0,this.stockmoyen.get(0).get(0)-(contrat.getProposition_Quantite()-sommemoyen));  	  		   		 	 	
-						solde += contrat.getProposition_Prix()*contrat.getProposition_Quantite() ;  
-						}}
 						else { 						
 						int sommefin=0;
 						while(sommefin+this.stockfin.get(0).get(0)<contrat.getProposition_Quantite()) {
@@ -429,19 +415,16 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 //				prodfin=(int)(prodfin*0.4);
 //			}
 			
-			this.ajouterStockFin(prodfin);
-			this.ajouterStockMoyen(prodBresil+prodIndo);
-			
-			this.vieillirStock();
-			
 			this.foreur.setMaladieActive();
 			this.balai.setMaladieActive();
 			double coeffAmerique = balai.pertesMaladie();
 			double coeffIndonesie = foreur.pertesMaladie();
+
+			this.vieillirStock();
 			
-
-
-
+			this.ajouterStockFin((int) (coeffAmerique*prodfin));
+			this.ajouterStockMoyen((int) (coeffAmerique*prodBresil+coeffIndonesie*prodIndo));
+			
 			 
 			double prixAchatAfrique = 0.0; 
 			int qteAchatAfrique = 0;
@@ -466,7 +449,7 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 				this.solde2.setValeur(this, this.solde);
 				qteAchatAfrique = ((IVendeurFevesProd) Monde.LE_MONDE.getActeur("Eq2PROD")).acheter(this.getStockMoyenCritique()-this.quantiteStockMoyen()); 
 				this.ajouterStockMoyen(qteAchatAfrique);}
-			//System.out.println(this.solde);
+				//System.out.println(this.solde);
 			
 			
 			
@@ -488,8 +471,8 @@ public class Eq3PROD implements Acteur, abstraction.eq3PROD.echangesProdTransfo.
 			this.getJournal().ajouter(" ");
 			this.getJournal().ajouter("> Production :");
 			this.getJournal().ajouter("<tt>- Moyenne qualité (Indonésie) : "+longToString(((long) (coeffIndonesie*prodIndo)))+" tonnes</tt>");
-			this.getJournal().ajouter("<tt>- Moyenene qualité (Brésil) : "+longToString(((long) (coeffAmerique*prodBresil)))+" tonnes</tt>");
-			this.getJournal().ajouter("<tt>- Moyenene qualité (Importation d'Afrique) : "+longToString((long) (qteAchatAfrique))+" tonnes</tt>"); 
+			this.getJournal().ajouter("<tt>- Moyenne qualité (Brésil) : "+longToString(((long) (coeffAmerique*prodBresil)))+" tonnes</tt>");
+			this.getJournal().ajouter("<tt>- Moyenne qualité (Importation d'Afrique) : "+longToString((long) (qteAchatAfrique))+" tonnes</tt>"); 
 			this.getJournal().ajouter("<tt>- Haute qualité (Equateur) : "+longToString(((long) (coeffAmerique*prodfin)))+" tonnes</tt>");
 			this.getJournal().ajouter(" ");
 			this.getJournal().ajouter("> Maladies :");
